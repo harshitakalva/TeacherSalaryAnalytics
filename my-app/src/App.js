@@ -4,7 +4,8 @@ import MyForm from './components/Forms';
 
 function App() {
   return (
-    <MyForm/>
+
+    <MyForm />
   );
 }
 
