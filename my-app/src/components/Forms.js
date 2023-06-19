@@ -12,7 +12,6 @@ const MyForm = () => {
         retirementPayment: '',
         totalSalary: '',
         feedback: '',
-        file: null,
     });
 
     const styles = {
@@ -75,7 +74,7 @@ const MyForm = () => {
         event.preventDefault();
         console.log(formData)
 
-        fetch("/submit", {
+        fetch("http://localhost:3001/submit", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -121,8 +120,8 @@ const MyForm = () => {
                         onChange={handleChange}
                     >
                         <option value="">Select FTE</option>
-                        <option value="full time">Full time</option>
-                        <option value="part time">Part time</option>
+                        <option value="1">Full time</option>
+                        <option value="0.5">Part time</option>
                     </select>
                 </div>
                 <div className="form-group">
@@ -192,32 +191,10 @@ const MyForm = () => {
                 <br></br>
                 <button type="submit" className="btn btn-primary">Submit</button>
             </form>
-            <form>
-
-
-
-
-
-
-
-                <br></br>
-                <label> OR</label><br></br>
-                <div className="form-group">
-                    <label>Upload Excel Sheet:</label><br></br>
-                    <input
-                        type="file"
-                        className="form-control-file"
-                        name="file"
-                        onChange={handleFileChange}
-                    />
-                    <br></br>
-                </div>
-                <button type="submit" className="btn btn-primary">Submit</button>
-            </form>
+            
         </div>
     );
 };
 
 export default MyForm;
-
 
