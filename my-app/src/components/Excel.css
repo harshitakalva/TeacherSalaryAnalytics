@@ -1,0 +1,91 @@
+h3 {
+    text-align: center;
+    padding: 20px;
+    font-family: 'sans-serif';
+}
+
+p {
+    text-align: center;
+    font-family: sans-serif;
+    
+}
+
+.formdesign {
+    background-color: #474545;
+    width: 600px; /* Set a fixed width for the container */
+    margin: 0 auto; /* Center the container horizontally */
+    padding: 40px; /* Add padding for spacing */
+    border-radius: 10px;
+    border: 1px solid rgba(55, 3, 69, 0.3);
+    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.3);
+    color: #fff;
+
+    
+}
+
+form#formdesign {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center form items horizontally */
+}
+
+form#formdesign .form-group {
+    margin-bottom: 20px;  
+}
+
+form#formdesign button {
+    width: 100%;
+    margin-top: 20px;
+}
+
+
+.Background{
+    
+    /* Center content vertically */ 
+    height: 100vh; /* Set body height to fill viewport */
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+
+.FormButton {
+    width: 200px;
+    padding: 15px 0;
+    text-align: center;
+    margin: 20px 10px;
+    border-radius: 25px;
+    font-weight: bold;
+    border: 3.5px solid #8884d8 ;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+  
+span {
+    background: #8884d8;
+    height: 100%;
+    width: 0;
+    border-radius: 25px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+    transition: 0.4s;
+
+}
+
+.FormButton:hover {
+    
+    background-color: #8884d8;
+
+}
+
+
+
+
+

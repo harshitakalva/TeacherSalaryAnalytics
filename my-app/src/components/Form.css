@@ -1,0 +1,151 @@
+
+
+h3 {
+    text-align: center;
+    padding: 20px;
+    font-family: 'sans-serif';
+}
+
+p {
+    text-align: center;
+    font-family: sans-serif;
+    
+}
+
+.fade-in {
+    opacity: 0; /* Initially hide the text */
+    animation: fade-in-animation 1s ease-in forwards;
+  }
+  
+  @keyframes fade-in-animation {
+    0% {
+      opacity: 0; /* Start with opacity 0 */
+      transform: translateX(20px); /* Optionally, animate the position */
+    }
+    100% {
+      opacity: 1; /* Fade in to full opacity */
+      transform: translateX(0); /* Optionally, animate to original position */
+    }
+  }
+  
+
+.register {
+    background-color: #474545;
+    width: 600px; /* Set a fixed width for the container */
+    margin: 0 auto; /* Center the container horizontally */
+    padding: 40px; /* Add padding for spacing */
+    border-radius: 10px;
+    border: 1px solid rgba(55, 3, 69, 0.3);
+    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.3);
+    color: #fff;
+
+    
+}
+
+form#register {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center form items horizontally */
+}
+
+form#register .form-group {
+    margin-bottom: 20px;
+}
+
+form#register button {
+    width: 100%;
+    margin-top: 20px;
+}
+
+
+.Background{
+    
+    /* Center content vertically */ 
+    height: 100vh; /* Set body height to fill viewport */
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+
+button {
+    width: 200px;
+    padding: 15px 0;
+    text-align: center;
+    margin: 20px 10px;
+    border-radius: 25px;
+    font-weight: bold;
+    border: 3.5px solid #8884d8 ;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+  
+span {
+    background: #8884d8;
+    height: 100%;
+    width: 0;
+    border-radius: 25px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+     
+
+}
+
+button:hover {
+    
+    background-color: #8884d8;
+
+}
+
+
+
+
+.custom-file-input {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    cursor: pointer;
+  }
+  
+  .custom-file-label {
+    padding: 10px 20px;
+    background-color: #8884d8;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  
+  .custom-file-label::after {
+    content: 'Browse'; /* Text or icon for the label */
+    margin-left: 10px;
+  }
+  
+  .custom-file-input:focus + .custom-file-label {
+    /* Styles when the file input is focused */
+    outline: 2px solid #8884d8;
+  }
+  
+  .custom-file-input:valid + .custom-file-label {
+    /* Styles when a file is selected */
+    background-color: #5d59a6;
+  }
+
+ 
+  
+  
+
+
+
+
+
