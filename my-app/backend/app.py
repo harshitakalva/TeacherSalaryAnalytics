@@ -10,9 +10,10 @@ CORS(app)
 # Configure MongoDB connection
 client = MongoClient('mongodb://localhost:27017')
 db = client['MichiganTeachers']
-collection = db['Michiganteachers']
+collection = db['FormTeachers']
 collection1 = db['ExcelTeachers']
-collection2 = db['AnalyticsData']
+collection2 = db['ExcelAnalytics']
+collection3 = db['FormAnalytics']
 
 
 
@@ -24,10 +25,10 @@ def submit_form():
 
     # Convert relevant fields to integers
     years = int(data['years'])
-    baseIncome = float(data['baseIncome'])
-    ficaPayment = float(data['ficaPayment'])
-    retirementPayment = float(data['retirementPayment'])
-    totalSalary = float(data['totalSalary'])
+    base = float(data['base'])
+    fica = float(data['fica'])
+    retirement = float(data['retirement'])
+    total = float(data['total'])
     fte = float(data['fte'])
 
     # Create a document to insert into the collection
@@ -35,10 +36,10 @@ def submit_form():
         'degree': data['degree'],
         'fte': fte,
         'years': years,
-        'baseIncome': baseIncome,
-        'ficaPayment': ficaPayment,
-        'retirementPayment': retirementPayment,
-        'totalSalary': totalSalary,
+        'base': base,
+        'fica': fica,
+        'retirement': retirement,
+        'total': total,
         'feedback': data['feedback']
     }
 
@@ -78,6 +79,16 @@ def get_data():
     #print(result)
     return jsonify(data)
 
+@app.route("/formdata", methods=["GET"])
+def get_form_data():
+    #data = collection1.find()
+    data = collection3.find_one({}, sort=[('_id', -1)])
+
+    data['_id'] = str(data['_id'])
+
+    #print(result)
+    return jsonify(data)
+
 
 
 # Trigger python script and add returned analytics value into another collection
@@ -90,20 +101,40 @@ def perform_analytics():
         document['_id'] = str(document['_id'])
         analyticsData.append(document)
 
-    #print(result)
-    #analyticsData = jsonify(analyticsData)
-
-    #data = jsonify(data)
-    # Call your Python analytics script
-    #print(analyticsData)
     result = analytics.run_analytics(analyticsData)
 
     collection2.insert_one(result)
+    
 
     # Return the analytics result as a response
     return {
         'message' : 'Python file trigger was successful',
         'result' : result
+    }
+
+
+
+@app.route('/formanalytics', methods=['POST'])
+def perform_analytics_form():
+    # Retrieve data from the request payload
+    data = collection.find()
+    print(data)
+    analyticsData = []
+    for document in data:
+        document['_id'] = str(document['_id'])
+        analyticsData.append(document)
+
+    
+    result = analytics.run_analytics(analyticsData)
+
+    collection3.insert_one(result)
+    
+
+    # Return the analytics result as a response
+    return {
+        'message' : 'Python file trigger was successful',
+        'result' : result
+        
     }
 
 

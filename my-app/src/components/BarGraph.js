@@ -1,10 +1,13 @@
 import React from 'react'
-import { PieChart, Pie, Tooltip, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend, LabelList, Label } from 'recharts';
+import { PieChart, Pie, Tooltip, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend, LabelList, Label, } from 'recharts';
 import { useState, useEffect } from 'react';
+
 
 const SalaryGraph = () => {
     const [responseData, setResponseData] = useState([]);
     const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+
+    
 
     useEffect(() => {
         // Fetch data from MongoDB
@@ -57,24 +60,58 @@ const SalaryGraph = () => {
         { name: 'BA', value: responseData.BASalaryMean }
     ]
 
+    const FeedbackBar = [
+        { name: 'Satisfied', value: responseData.satisfiedCount },
+        { name: 'Neutral', value: responseData.neutralCount },
+        { name: 'Dissatisfied', value: responseData.dissatisfiedCount },
 
+    ]
+
+    // const x = responseData.years;   
+    // const y = responseData.total;
+
+    // const jsonList = Object.keys(x).map((key) => {
+    //     return { x: x[key], y: y[key] };
+    //   });
+      
+    //   console.log(jsonList);
+      //console.log(FeedbackBar)
+
+    const CustomTooltip = ({ active, payload }) => {
+        if (active && payload && payload.length) {
+          const { name, value } = payload[0];
+          return (
+            <div style={{'background-color': '#fff',
+                'border': '1px solid #ccc',
+                'padding': '10px',
+                'width': '200px',
+                'height': '65px'}}>
+              <p>{`${name} : ${value}`}</p>
+            </div>
+          );
+        }
+      
+        return null;
+      };
 
 
 
 
     return (
+        <>
+
 
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <h4>Average Total Salary : {responseData.totalSalaryMean}</h4>
 
             <div>
-                <PieChart width={490} height={200}>
+                <PieChart width={800} height={400}>
                     <Pie
                         dataKey="value"
                         isAnimationActive={false}
                         data={incomePie}
-                        cx="50%"
-                        cy="50%"
+                        cx='50%'
+                        cy='50%'
                         outerRadius={80}
                         fill="#8884d8"
                         label
@@ -84,18 +121,13 @@ const SalaryGraph = () => {
                         {incomePie.map((entry, index) => (
                             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                         ))}
-                        <Label
-                            content={({ name }) => name}
-                            position="inside"
-                            fontSize={14}
-                            fontWeight="bold"
-                            fill="#fff"
-                        />
+
                     </Pie>
-                    <Tooltip/>
+                    <Tooltip content={<CustomTooltip />} />
                 </PieChart>
+
                 <br></br>
-                <label>Breakdown of total salary in terms of base income, fica and retirement payments</label>
+                <label style={{ 'display': 'flex', 'flex-direction': 'column', 'align-items': 'center' }}>Breakdown of total salary in terms of base income, fica and retirement payments</label>
                 <br></br>
                 <br></br>
             </div>
@@ -115,15 +147,15 @@ const SalaryGraph = () => {
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="name" />
                     <YAxis dataKey="value" />
-                    <Tooltip />
-                    <Legend />
+                    <Tooltip content={<CustomTooltip />} />
+
                     <Bar dataKey="value" fill="#8884d8" >
                         <LabelList dataKey="value" position="top" />
                     </Bar>
 
 
                 </BarChart>
-                <label>Number of employees working full time and part time</label>
+                <label style={{ 'display': 'flex', 'flex-direction': 'column', 'align-items': 'center' }}>Number of employees working full time and part time</label>
                 <br></br>
                 <br></br>
             </div>
@@ -143,11 +175,14 @@ const SalaryGraph = () => {
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="name" />
                     <YAxis />
-                    <Tooltip />
-                    <Legend />
-                    <Bar dataKey="value" fill="#8884d8" />
+                    <Tooltip content={<CustomTooltip />} />
+
+                    <Bar dataKey="value" fill="#8884d8" >
+                        <LabelList dataKey="value" position="top" />
+                    </Bar>
+
                 </BarChart>
-                <label>Number of employees with BA and MA degrees</label>
+                <label style={{ 'display': 'flex', 'flex-direction': 'column', 'align-items': 'center' }}>Number of employees with BA and MA degrees</label>
 
             </div>
 
@@ -168,10 +203,10 @@ const SalaryGraph = () => {
                                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                             ))}
                         </Pie>
-                        <Tooltip />
+                        <Tooltip content={<CustomTooltip />} />
 
                     </PieChart>
-                    <label>Average Salary with respect to FTE</label>
+                    <label style={{ 'display': 'flex', 'flex-direction': 'column', 'align-items': 'center' }}>Average Salary with respect to FTE</label>
                 </div>
 
 
@@ -192,20 +227,87 @@ const SalaryGraph = () => {
                                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                             ))}
                         </Pie>
-                        <Tooltip />
+                        <Tooltip content={<CustomTooltip />} />
 
                     </PieChart>
-                    <label>Average Salary with respect to Degree</label>
+                    <label style={{ 'display': 'flex', 'flex-direction': 'column', 'align-items': 'center' }}>Average Salary with respect to Degree</label>
                     <br></br>
                     <br></br>
                 </div>
             </div>
 
+            <div>
+                <BarChart
+                    width={500}
+                    height={300}
+                    data={FeedbackBar}
+                    margin={{
+                        top: 5,
+                        right: 30,
+                        left: 20,
+                        bottom: 5,
+                    }}
+                >
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="name" />
+                    <YAxis />
+                    <Tooltip content={<CustomTooltip />} />
+
+                    <Bar dataKey="value" fill="#8884d8" >
+                        <LabelList dataKey="value" position="top" />
+                    </Bar>
+
+                </BarChart>
+                <label style={{ 'display': 'flex', 'flex-direction': 'column', 'align-items': 'center' }}>Feedback from teachers</label>
+
+            </div>
+
+            <br></br>
+
+            {/* <div>
+            <LineChart
+      width={500}
+      height={300}
+      data={jsonList}
+      margin={{
+        top: 5,
+        right: 30,
+        left: 20,
+        bottom: 5,
+      }}
+    >
+      <CartesianGrid strokeDasharray="3 3" />
+      <XAxis dataKey="x" />
+      <YAxis />
+      <Tooltip />
+      <Legend />
+      <Line type="monotone" dataKey="y" stroke="#8884d8" activeDot={{ r: 8 }} />
+      
+    </LineChart>
+    </div>
+
+    <div>
+    <ScatterChart
+      margin={{
+        top: 20,
+        right: 20,
+        bottom: 20,
+        left: 20,
+      }}
+    >
+      <CartesianGrid />
+      <XAxis type="number" dataKey="x" name="stature" unit="cm" />
+      <YAxis type="number" dataKey="y" name="weight" unit="kg" />
+      <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+      <Scatter name="A school" data={jsonList} fill="#8884d8" />
+    </ScatterChart>
+    </div> */}
 
 
 
 
         </div>
+    </>
     )
 }
 

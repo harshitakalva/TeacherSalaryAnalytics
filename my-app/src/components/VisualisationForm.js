@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect } from 'react';
-import axios from 'axios'
-import SalaryGraph from './BarGraph';
+import FormGraph from './FormGraph';
 
 
-const Visualisation = () => {
+
+const VisualisationForm = () => {
 
     const [responseData, setResponseData] = useState([]);
-      
-        useEffect(() => {
-        fetch("http://localhost:3001/analytics", {
-            method: "POST",
+    useEffect(() => {
+        fetch("http://localhost:3001/formanalytics", {
+            method: "POST",  
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -28,21 +27,21 @@ const Visualisation = () => {
         },[]
       ) 
 
-
-
-
     return (
+        <>
+        
         <div>
             <strong><h1 style={{'text-align': 'center',
     'padding': '20px',
     'font-family': 'sans-serif'}}>Data Analytics Visualisation</h1></strong>
-            <SalaryGraph/>
+            <FormGraph/>
         </div>
+        </>
+        
 
     )
-
 
 }
 
 
-export default Visualisation;
+export default VisualisationForm;

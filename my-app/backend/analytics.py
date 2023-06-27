@@ -11,7 +11,9 @@ def run_analytics(data):
     MASalary = []
     fullTime = []
     partTime = []
-    
+    feedback = []
+    years = []
+
     for document in data:
         
         total.append(document['total'] )
@@ -20,6 +22,8 @@ def run_analytics(data):
         retirement.append(document['retirement'] )
         fte.append(document['fte'])
         degree.append(document['degree'])
+        feedback.append(document['feedback'])
+        years.append(document['years'])
 
         if document['degree'] == 'BA':
             BASalary.append(document['total'])
@@ -58,10 +62,10 @@ def run_analytics(data):
     fullTimeSalary = np.mean(fullTime)
     partTimeSalary = np.mean(partTime)
 
-
-
-
-
+    #feedback count
+    satisfiedCount = feedback.count('Satisfied')
+    neutralCount = feedback.count('Neutral')
+    dissatisfiedCount = feedback.count('Dissatisfied')
 
 
 
@@ -77,7 +81,11 @@ def run_analytics(data):
         'BASalaryMean' : BASalaryMean,
         'MASalaryMean' : MASalaryMean,
         'fullTimeSalary' : fullTimeSalary,
-        'partTimeSalary' : partTimeSalary
+        'partTimeSalary' : partTimeSalary,
+        'satisfiedCount' : satisfiedCount,
+        'neutralCount' : neutralCount,
+        'dissatisfiedCount' : dissatisfiedCount ,
+        
 
     }
 

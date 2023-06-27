@@ -4,6 +4,7 @@ import MyForm from './components/Forms';
 import MyExcel from './components/Excel';
 import HomePage from './components/Home';
 import Visualisation from './components/Visualisation';
+import VisualisationForm from './components/VisualisationForm';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route exact path='/form' element={<MyForm />} />
         <Route exact path='/excel' element={<MyExcel />} />
         <Route exact path='/visualisation' element={<Visualisation />} />
+        <Route exact path='/visualisationform' element={<VisualisationForm />} />
       </Routes>
     </Router>
 

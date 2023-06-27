@@ -20,11 +20,11 @@ p {
   @keyframes fade-in-animation {
     0% {
       opacity: 0; /* Start with opacity 0 */
-      transform: translateX(20px); /* Optionally, animate the position */
+      transform: translateY(-20px); /* Optionally, animate the position */
     }
     100% {
       opacity: 1; /* Fade in to full opacity */
-      transform: translateX(0); /* Optionally, animate to original position */
+      transform: translateY(0); /* Optionally, animate to original position */
     }
   }
   
@@ -83,7 +83,7 @@ button {
     cursor: pointer;
     position: relative;
     overflow: hidden;
-}
+}   
   
 span {
     background: #8884d8;
@@ -141,9 +141,43 @@ button:hover {
     background-color: #5d59a6;
   }
 
+
  
-  
-  
+.table-container {
+    display: flex;
+    justify-content: center;
+}
+
+table {
+    border-collapse: collapse;
+    width: 80%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #eaeaea;
+}
+
+
+
+
+
+
 
 
 
